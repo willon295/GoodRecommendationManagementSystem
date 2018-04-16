@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<configuration>
+
+    <!-- Set nameservices,which is the same as core-site.xml-->
+    <property>
+        <name>dfs.nameservices</name>
+	<value>mycluster</value>
+    </property>
+
+    <!--Set namesevices  IDs -->
+    <property>
+	<name>dfs.ha.namenodes.mycluster</name>
+	<value>nn0,nn1</value>
+    </property>
+
+    <!--Set rpc-address -->
+    <property>
+        <name>dfs.namenode.rpc-address.mycluster.nn0</name>
+        <value>node-00:9000</value>
+    </property>
+    <property>
+        <name>dfs.namenode.rpc-address.mycluster.nn1</name>
+        <value>node-01:9000</value>
+    </property>
+
+    <!--Set http-address  IDs -->
+    <property>
+        <name>dfs.namenode.http-address.mycluster.nn0</name>
+        <value>node-00:50070</value>
+    </property>
+    <property>
+        <name>dfs.namenode.http-address.mycluster.nn1</name>
+        <value>node-01:50070</value>
+    </property>
+
+    <!--Set the path of jounalNode -->
+    <property>
+        <name>dfs.namenode.shared.edits.dir</name>
+        <value>qjournal://node-10:8485;node-11:8485;node-12:8485/mycluster</value>
+    </property>
+    <property>
+          <name>dfs.journalnode.edits.dir</name>
+          <value>/root/hadoopData/journal</value>
+    </property>
+
+    <!--Enable automatic failover -->
+    <property>
+        <name>dfs.ha.automatic-failover.enabled</name>
+        <value>true</value>
+    </property>
+    <property>
+        <name>dfs.client.failover.proxy.provider.mycluster</name>
+        <value>org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider</value>
+    </property>
+    <property>
+        <name>dfs.ha.fencing.methods</name>
+        <value>shell(/bin/true)</value>
+    </property>
+    <!--ssh免登陆 -->
+    <property>
+        <name>dfs.ha.fencing.ssh.private-key-files</name>
+        <value>/root/.ssh/id_rsa</value>
+    </property>
+
+    <!-- set namenode and datanode local file dir-->
+    <property>  
+       <name>dfs.name.dir</name>  
+       <value>/root/hadoopData/hdfs/name</value>  
+    </property>  
+    <property>  
+       <name>dfs.data.dir</name>  
+       <value>/root/hadoopData/hdfs/data</value>  
+    </property>
+
+    <property>
+	<name>dfs.permissions</name>
+	<value>false</value>
+    </property>
+</configuration>

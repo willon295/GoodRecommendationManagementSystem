@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<configuration>
+
+    <!-- Set cluster name -->
+    <property>
+	<name>fs.defaultFS</name>
+	<value>hdfs://mycluster</value>
+    </property>
+
+    <!-- Set zookerper address -->
+    <property>
+	<name>ha.zookeeper.quorum</name>
+	<value>node-10:2181,node-11:2181,node-12:2181</value>
+    </property>
+
+    <!-- Set tmpdir -->
+    <property>
+        <name>hadoop.tmp.dir</name>
+        <value>/root/hadoopData/tmp</value>
+    </property>
+</configuration>

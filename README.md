@@ -1,0 +1,2 @@
+# GoodRecommendationManagementSystem
+基于Hadoop简单商品推荐系统

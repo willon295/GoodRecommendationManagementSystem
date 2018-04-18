@@ -16,7 +16,9 @@ import org.apache.hadoop.util.ToolRunner;
 
 import java.io.IOException;
 
-//合并推荐结果数据
+/**
+ * 统计零散的推荐结果
+ */
 public class MakeSumForMultiplication extends Configured implements Tool {
     public int run(String[] strings) throws Exception {
         Configuration conf = getConf();
@@ -36,7 +38,6 @@ public class MakeSumForMultiplication extends Configured implements Tool {
         TextInputFormat.addInputPath(job,in);
 
 
-
         //reducer
         job.setReducerClass(MakeSumForMultiplicationReducer.class);
         job.setOutputKeyClass(Text.class);
@@ -50,7 +51,7 @@ public class MakeSumForMultiplication extends Configured implements Tool {
 
 
     //
-    static class MakeSumForMultiplicationMapper extends Mapper<Object, Text, Text, IntWritable> {
+    public static class MakeSumForMultiplicationMapper extends Mapper<Object, Text, Text, IntWritable> {
 
 
         Text keyOut = new Text();
@@ -66,7 +67,7 @@ public class MakeSumForMultiplication extends Configured implements Tool {
         }
     }
 
-    static class MakeSumForMultiplicationReducer extends Reducer<Text, IntWritable, Text, IntWritable> {
+    public static class MakeSumForMultiplicationReducer extends Reducer<Text, IntWritable, Text, IntWritable> {
 
         IntWritable valurOut = new IntWritable();
 

@@ -15,8 +15,9 @@ import org.apache.hadoop.util.ToolRunner;
 
 import java.io.IOException;
 
-
-//生成用户  购买列表
+/**
+ * 生成用户购买列表
+ * */
 public class UserBuyGoodList extends Configured implements Tool {
 
 
@@ -48,7 +49,7 @@ public class UserBuyGoodList extends Configured implements Tool {
         return job.waitForCompletion(true)?0:1;
     }
 
-    static class UserBuyGoodListMapper extends Mapper<LongWritable, Text, Text, Text> {
+    public static class UserBuyGoodListMapper extends Mapper<LongWritable, Text, Text, Text> {
 
         Text user = new Text();
         Text good = new Text();
@@ -63,7 +64,7 @@ public class UserBuyGoodList extends Configured implements Tool {
     }
 
 
-    static class UserBuyGoodListReducer extends Reducer<Text, Text, Text, Text> {
+    public static class UserBuyGoodListReducer extends Reducer<Text, Text, Text, Text> {
 
         Text goodList = new Text();
         @Override

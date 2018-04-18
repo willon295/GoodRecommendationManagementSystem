@@ -18,6 +18,10 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+
+/**
+ * 计算零散的商品推荐信息
+ */
 public class MultiplyGoodListAndUserVector extends Configured implements Tool {
     public int run(String[] strings) throws Exception {
 
@@ -56,7 +60,7 @@ public class MultiplyGoodListAndUserVector extends Configured implements Tool {
 
 
     //处理物品 mapper
-    static class MultiplyGoodListAndUserVectorMapper1 extends Mapper<LongWritable, Text, Text, Text> {
+    public static class MultiplyGoodListAndUserVectorMapper1 extends Mapper<LongWritable, Text, Text, Text> {
 
         Text valueOut = new Text();
         Text keyOut = new Text();
@@ -71,7 +75,7 @@ public class MultiplyGoodListAndUserVector extends Configured implements Tool {
     }
 
     //处理用户购买向量  mapper
-    static class MultiplyGoodListAndUserVectorMapper2 extends Mapper<LongWritable, Text, Text, Text> {
+    public static class MultiplyGoodListAndUserVectorMapper2 extends Mapper<LongWritable, Text, Text, Text> {
         Text valueOut = new Text();
         Text keyOut = new Text();
 
@@ -86,7 +90,7 @@ public class MultiplyGoodListAndUserVector extends Configured implements Tool {
 
     // 进入reducer 的结果是    （ 20001, [U1001:1 1002:1 ,G20001:3,2002:2,2003:4]     ）
     // 输出为   用户:物品  -->  推荐权重
-    static class MultiplyGoodListAndUserVectorReducer extends Reducer<Text, Text, Text, Text> {
+    public static class MultiplyGoodListAndUserVectorReducer extends Reducer<Text, Text, Text, Text> {
 
         Text keyOut = new Text();
         Text valueOut = new Text();

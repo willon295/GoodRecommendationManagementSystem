@@ -16,6 +16,9 @@ import org.apache.hadoop.util.ToolRunner;
 
 import java.io.IOException;
 
+/**
+ * 推荐数据去重，除去用户已经购买的商品
+ * */
 public class DuplicateDataFromResult extends Configured implements Tool {
     public int run(String[] strings) throws Exception {
 
@@ -26,12 +29,8 @@ public class DuplicateDataFromResult extends Configured implements Tool {
         Path out = new Path(conf.get("out"));
         Job job = Job.getInstance(conf);
         job.setJarByClass(this.getClass());
-
-        //job.setMapperClass(DuplicateDataFromResultForRawDataMapper.class);
-        //job.setMapperClass(DuplicateDataFromResultForRecommandResultMapper.class);
         MultipleInputs.addInputPath(job, rawin, TextInputFormat.class, DuplicateDataFromResultForRawDataMapper.class);
         MultipleInputs.addInputPath(job, resin, TextInputFormat.class, DuplicateDataFromResultForRecommandResultMapper.class);
-
 
         //设置 reducer
         job.setReducerClass(DuplicateDataFromResultReducer.class);
@@ -47,7 +46,7 @@ public class DuplicateDataFromResult extends Configured implements Tool {
 
 
     //处理原始数据 mapper
-    static class DuplicateDataFromResultForRawDataMapper extends Mapper<LongWritable, Text, Text, Text> {
+    public static class DuplicateDataFromResultForRawDataMapper extends Mapper<LongWritable, Text, Text, Text> {
 
         Text keyOut = new Text();
         Text valueOut = new Text();
@@ -67,7 +66,7 @@ public class DuplicateDataFromResult extends Configured implements Tool {
 
 
     //处理推荐结果数据 mapper
-    static class DuplicateDataFromResultForRecommandResultMapper extends Mapper<LongWritable, Text, Text, Text> {
+    public static class DuplicateDataFromResultForRecommandResultMapper extends Mapper<LongWritable, Text, Text, Text> {
         Text keyOut = new Text();
         Text valueOut = new Text();
 
@@ -84,7 +83,7 @@ public class DuplicateDataFromResult extends Configured implements Tool {
         }
     }
 
-    static class DuplicateDataFromResultReducer extends Reducer<Text, Text, Text, Text> {
+    public static class DuplicateDataFromResultReducer extends Reducer<Text, Text, Text, Text> {
 
 
         //  1001  2001  =>  [@1 , #3 ]

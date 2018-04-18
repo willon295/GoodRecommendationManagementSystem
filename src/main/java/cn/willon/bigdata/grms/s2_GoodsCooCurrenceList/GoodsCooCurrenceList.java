@@ -15,10 +15,8 @@ import org.apache.hadoop.util.ToolRunner;
 
 import java.io.IOException;
 
-/*
-
+/**
 计算商品的共现关系
-
 1. 将用户的购买商品列表进行分割
 2. 商品与商品之间 两两共现， 自身与自身也算
 */
@@ -50,7 +48,7 @@ public class GoodsCooCurrenceList  extends Configured implements Tool{
         return job.waitForCompletion(true)?0:1;
     }
 
-    static  class  GoodsCooCurrenceListMapper extends Mapper<LongWritable,Text,Text,Text>{
+    public static  class  GoodsCooCurrenceListMapper extends Mapper<LongWritable,Text,Text,Text>{
         Text outkey = new Text();
         Text outvalue = new Text();
         // 10001  34,34,54,656
@@ -67,7 +65,7 @@ public class GoodsCooCurrenceList  extends Configured implements Tool{
         }
     }
 
-    static  class GoodsCooCurrenceListReducer extends Reducer<Text,Text,Text,Text>{
+    public static  class GoodsCooCurrenceListReducer extends Reducer<Text,Text,Text,Text>{
 
         @Override
         protected void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException {

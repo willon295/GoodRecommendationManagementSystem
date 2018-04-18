@@ -20,9 +20,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-// 计算用户的购买向量
-// 使用第一步输出作为输入
-/*10001   20001,20005,20006,20007,20002
+/**
+计算用户的购买向量
+使用第一步输出作为输入
+10001   20001,20005,20006,20007,20002
 10002   20006,20003,20004
 10003   20002,20007
 10004   20001,20002,20005,20006
@@ -30,7 +31,7 @@ import java.util.List;
 10006   20004,20007*/
 public class UserBuyGoodsVector extends Configured implements Tool {
 
-    static class UserBuyGoodsVectorMapper extends Mapper<LongWritable, Text, Text, IntWritable> {
+    public static class UserBuyGoodsVectorMapper extends Mapper<LongWritable, Text, Text, IntWritable> {
 
         Text keyOut = new Text();
         IntWritable valueOut = new IntWritable();
@@ -51,7 +52,7 @@ public class UserBuyGoodsVector extends Configured implements Tool {
     }
 
 
-    static class UserBuyGoodsVectorReducer extends Reducer<Text, IntWritable, Text, Text> {
+    public static class UserBuyGoodsVectorReducer extends Reducer<Text, IntWritable, Text, Text> {
 
 
         Text valueOut = new Text();

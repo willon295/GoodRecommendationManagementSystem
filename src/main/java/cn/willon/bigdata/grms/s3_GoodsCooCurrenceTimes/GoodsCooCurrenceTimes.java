@@ -19,10 +19,11 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-//计算物品的共现次数
-// 物品  物品 次数
 
-
+/**
+ * 计算物品的共现次数
+ * 物品  物品 次数
+ */
 public class GoodsCooCurrenceTimes extends Configured implements Tool {
 
     public int run(String[] strings) throws Exception {
@@ -50,7 +51,7 @@ public class GoodsCooCurrenceTimes extends Configured implements Tool {
 
     }
 
-    static class GoodsCooCurrenceTimesMapper extends Mapper<LongWritable, Text, Text, IntWritable> {
+    public static class GoodsCooCurrenceTimesMapper extends Mapper<LongWritable, Text, Text, IntWritable> {
 
         Text keyOut = new Text();
         IntWritable valueOut = new IntWritable();
@@ -66,7 +67,7 @@ public class GoodsCooCurrenceTimes extends Configured implements Tool {
         }
     }
 
-    static class GoodsCooCurrenceTimesReducer extends Reducer<Text, IntWritable, Text, Text> {
+    public static class GoodsCooCurrenceTimesReducer extends Reducer<Text, IntWritable, Text, Text> {
 
         Text valueOut = new Text();
 
